@@ -11,7 +11,7 @@ const io=SocketIO.listen(Server);
 
 app.use(express.static(__dirname + '/public'))
 
-open("http://localhost:3000/", "chrome");
+open("http://localhost:3000/", "chrome --kiosk");
 
 Server.listen(3000,function(){
   console.log('Servidor Ecuchando en el puerto 3000');
@@ -23,7 +23,7 @@ const SerialPort =require('serialport');
 const ReadLine= SerialPort.parsers.Readline;
 
 
-const port =new SerialPort('/dev/cu.usbmodem1441',{
+/*const port =new SerialPort('/dev/cu.usbmodem1441',{
   baudRate:9600
 });
 
@@ -47,7 +47,7 @@ io.on('connection', (socket) => {
     /**
    * Socket listener to determine whether or not to send HIGH / LOW
    * values to Arduino.
-   */
+   *
   socket.on('message', (msg) => {
     console.log('Message received: ', msg);
     switch (msg) {
@@ -61,4 +61,4 @@ io.on('connection', (socket) => {
         break;
     }
   });
-});
+});*/

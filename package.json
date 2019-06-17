@@ -4,11 +4,13 @@
   "description": "Lux Regreso a Clases 2019",
   "main": "serve/index.js",
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "express": "^4.17.1",
+    "express-myconnection": "^1.0.4",
+    "mysql": "^2.17.1",
     "open": "^6.3.0",
     "serialport": "^7.1.5",
-    "socket.io": "^2.2.0",
-    "bootstrap": "^4.3.1"
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {},
   "scripts": {

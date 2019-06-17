@@ -1,0 +1,27 @@
+{
+  "name": "lux_regresoclases_2019",
+  "version": "1.0.0",
+  "description": "Lux Regreso a Clases 2019",
+  "main": "serve/index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "open": "^6.3.0",
+    "serialport": "^7.1.5",
+    "socket.io": "^2.2.0",
+    "bootstrap": "^4.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toledomendizabal/Lux_RegresoClases_2019.git"
+  },
+  "author": "Rafael Toledo/Marco Martinez K9 Publicidad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toledomendizabal/Lux_RegresoClases_2019/issues"
+  },
+  "homepage": "https://github.com/toledomendizabal/Lux_RegresoClases_2019#readme"
+}

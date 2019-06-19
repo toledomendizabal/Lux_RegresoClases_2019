@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <link href="./assets/moviequiz/main.css" rel = "stylesheet" type = "text/css"/>
+    </head>
+    <body>
+        <div id="question">
+            <h2>¿Como se llama esta pelicula?</h2>
+        </div>
+        <div id="score">
+            <h3>Score: <span id="score-val">0</span></h3>
+        </div>
+        <div id="container">
+            <video id="main-video" width="100%" height="100%" autoplay>
+                <source src="./video/8920.mp4" type="video/mp4">
+            </video>
+            <div id="progress-bar"></div>
+            <!--video id="blur-video" width="100%" height="100%">
+                <source src="./video/8920.mp4" type="video/mp4">
+            </video-->
+            <div id ="cover">
+                    <button id="start">Empezar</button>
+            </div> 
+            <div id="p-bar"></div>
+            
+        </div>
+        <div id="questions">
+            <label class="radio">
+                <input id="in1" type="radio" name="movie" value="1976">
+                <span id="r1">1976</span>
+            </label>
+            <label class="radio">
+                <input id="in2" type="radio" name="movie" value="1977">
+                <span id="r2">1977</span>
+            </label>
+            <label class="radio">
+                <input id="in3" type="radio" name="movie" value="1978">
+                <span id="r3">1978</span>
+            </label>
+            <label class="radio">
+                <input id="in4" type="radio" name="movie" value="1978">
+                <span id="r4">1978</span>
+            </label>
+        </div>
+        <script>
+            $(function() {
+                let current = 0;
+                let score = 0;
+                let content;
+                $('input').prop('checked', false);
+                $('#questions').hide();
+
+                
+
+                $.getJSON("quiz.json", function(data) {
+                    
+                    content = data.content;
+                    $('video source').attr('src', "./video/" + content[current].file);
+                    $("video")[0].load();
+                    let options = shuffle([...content[current].opciones, content[current].respuesta]);
+                    $("#r1").text(options[0]);
+                    $("#r2").text(options[1]);
+                    $("#r3").text(options[2]);
+                    $("#r4").text(options[3]);
+                    $("#in1").val(options[0]);
+                    $("#in2").val(options[1]);
+                    $("#in3").val(options[2]);
+                    $("#in4").val(options[3]);
+                    
+                });
+
+                $("#start").click((e)=>{
+                    $("video").trigger('play'); 
+                    $("#cover").fadeOut("fast");
+                    $('#questions').fadeIn("fast");
+                    score=0;
+                    $("#score-val").text(score);
+                    animateBar();
+                });
+                
+                $("input").click((e)=>{
+                    console.log(e.target.value);
+                    let ans = e.target.value
+                    if(ans == content[current].respuesta) score++;
+                    $("#score-val").text(score);
+                    nextVideo();
+                    
+                });
+
+                const nextVideo = () =>{
+                    $("#p-bar").stop();
+                    $("#p-bar").width("100%");
+                    $("video").trigger('pause');
+                    $('input').prop('checked', false);
+                    current++;
+                    if(current == content.length){
+                        $("#cover").fadeIn("fast");
+                        current = 0;
+                        $('#questions').hide();
+                    }else{
+                        $('video source').attr('src', "./video/" + content[current].file);
+                        $("video")[0].load();
+                        let options = shuffle([...content[current].opciones, content[current].respuesta]);
+                        $("#r1").text(options[0]);
+                        $("#r2").text(options[1]);
+                        $("#r3").text(options[2]);
+                        $("#r4").text(options[3]);
+                        $("#in1").val(options[0]);
+                        $("#in2").val(options[1]);
+                        $("#in3").val(options[2]);
+                        $("#in4").val(options[3]);
+                        animateBar();
+                    }
+                    
+                }
+
+                const animateBar = () =>{
+                    $("#p-bar").animate({
+                        width: 0
+                    },{
+                        specialEasing: {
+                            width: "linear"
+                        },
+                        duration: 10000, 
+                        complete: function(){
+                            nextVideo();
+                        }
+                    });
+                }
+                
+                const shuffle = (array) => {
+                    let counter = array.length, temp, index;
+                    while ( counter > 0 ) {
+                        index = Math.floor( Math.random() * counter );
+                        counter--;
+                        temp = array[ counter ];
+                        array[ counter ] = array[ index ];
+                        array[ index ] = temp;
+                    }
+                    return array;
+                }
+                
+            });
+        </script>
+    </body>
+
+</html>

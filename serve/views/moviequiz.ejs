@@ -5,6 +5,7 @@
         <link href="./assets/moviequiz/main.css" rel = "stylesheet" type = "text/css"/>
     </head>
     <body>
+        <pre id="datas"> <%= data %> </pre>
         <div id="question">
             <h2>¿Como se llama esta pelicula?</h2>
         </div>
@@ -50,13 +51,16 @@
                 let content;
                 $('input').prop('checked', false);
                 $('#questions').hide();
-
+               
+                
                 
 
-                $.getJSON("quiz.json", function(data) {
-                    
+                $.getJSON("assets/moviequiz/quiz.json", function(data) {
+                    data=$("#datas").text();
+                    data=JSON.parse(data);
+                    console.log(data);
                     content = data.content;
-                    $('video source').attr('src', "./video/" + content[current].file);
+                    $('video source').attr('src', "./assets/moviequiz/video/" + content[current].file);
                     $("video")[0].load();
                     let options = shuffle([...content[current].opciones, content[current].respuesta]);
                     $("#r1").text(options[0]);
@@ -83,6 +87,7 @@
                     console.log(e.target.value);
                     let ans = e.target.value
                     if(ans == content[current].respuesta) score++;
+                    alert("la respuesta correcta es :"+content[current].respuesta);
                     $("#score-val").text(score);
                     nextVideo();
                     
@@ -95,9 +100,11 @@
                     $('input').prop('checked', false);
                     current++;
                     if(current == content.length){
-                        $("#cover").fadeIn("fast");
-                        current = 0;
-                        $('#questions').hide();
+                        setTimeout(function(){
+                            $("#cover").fadeIn("fast");
+                            current = 0;
+                            $('#questions').hide();
+                        },5000);
                     }else{
                         $('video source').attr('src', "./video/" + content[current].file);
                         $("video")[0].load();
@@ -122,8 +129,9 @@
                         specialEasing: {
                             width: "linear"
                         },
-                        duration: 10000, 
+                        duration: 15000, 
                         complete: function(){
+                            alert("la respuesta correcta es :"+content[current].respuesta);
                             nextVideo();
                         }
                     });

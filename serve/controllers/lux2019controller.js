@@ -2,7 +2,7 @@ const controller={};
 
 controller.peliculas =(req,res) => {
     req.getConnection((err,conn)=>{
-        conn.query('SELECT pregunta,archivo, respuesta2 , respuesta3 , respuesta4 , respuesta1 as respuestacorrecta FROM peliculas',(err,npeliculas)=>{
+        conn.query('SELECT pregunta,archivo, respuesta2 , respuesta3 , respuesta4 , respuesta1 as respuestacorrecta FROM peliculas ORDER BY RAND() LIMIT 5',(err,npeliculas)=>{
             var datos=[];
             var i=1;
             npeliculas.forEach(element=> {

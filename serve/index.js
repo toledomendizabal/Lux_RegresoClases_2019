@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname,'public')));
 
 //iniciando el servidor
 app.listen(app.get('port'),()=> {
-  console.log('Server on port 3000');
+  console.log('Server on port '+app.get('port'));
 });
 
-//open("http://localhost:3000/", "chrome");
+open("http://localhost:"+app.get('port')+"/", "chrome --kiosk");

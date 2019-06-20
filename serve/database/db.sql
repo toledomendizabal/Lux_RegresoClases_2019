@@ -16,7 +16,7 @@ CREATE TABLE peliculas(
     respuesta2 VARCHAR(100) NOT NULL,
     respuesta3 VARCHAR(100) NOT NULL,
     respuesta4 VARCHAR(100) NOT NULL,
-    section VARCHAR(7) NOT NULL
+    imagen VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE photos(
@@ -26,8 +26,7 @@ CREATE TABLE photos(
     archivo2 VARCHAR(100) NOT NULL,
     archivo3 VARCHAR(100) NOT NULL,
     archivo4 VARCHAR(100) NOT NULL,
-    respuesta VARCHAR(100) NOT NULL,
-    section VARCHAR(7) NOT NULL
+    imagen VARCHAR(50) NOT NULL,
 );
 
 --- muestra las tablas

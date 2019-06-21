@@ -40,4 +40,4 @@ app.listen(app.get('port'),()=> {
   console.log('Server on port '+app.get('port'));
 });
 
-open("http://localhost:"+app.get('port')+"/", "chrome --kiosk");
+//open("http://localhost:"+app.get('port')+"/", "chrome --kiosk");
